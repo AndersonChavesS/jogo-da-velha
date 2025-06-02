@@ -1,0 +1,233 @@
+@import url("https://fonts.googleapis.com/css2?family=Carter+One&family=VT323&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Pagina inicial */
+#main-initial-page {
+  height: 100vh;
+  background: #9b2a2a;
+  background: linear-gradient(
+    90deg,
+    rgba(155, 42, 42, 1) 0%,
+    rgba(199, 87, 119, 1) 50%,
+    rgba(237, 221, 83, 1) 100%
+  );
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
+}
+
+#main-initial-page #title {
+  font-family: "VT323";
+  font-size: 3rem;
+  color: #e0e0e0;
+  text-shadow: #000 0px 0px 10px;
+}
+
+.blink {
+  text-decoration: none;
+  color: wheat;
+  text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700;
+  box-shadow: 0 0 5px #ffd700, 0 0 15px #ffd700;
+  font-family: "VT323", monospace;
+  font-weight: 300;
+  font-size: 2.8rem;
+  animation: blink 3s infinite;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 3px 15px;
+}
+
+@keyframes blink {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+
+/* game */
+#main-game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 100px;
+  height: 100vh;
+  background: #833ab4;
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgb(186, 113, 11) 100%
+  );
+}
+
+#main-game .presentation {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#main-game h1 {
+  font-family: "VT323", monospace;
+  font-size: 5.5rem;
+  font-weight: 300;
+  color: #e0e0e0;
+  text-shadow: #000 0px 0px 20px;
+}
+
+.finish {
+  margin: auto;
+  text-decoration: none;
+  color: #fff;
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-size: 2.8rem;
+  border: 1px solid;
+  border-radius: 15px;
+  padding: 5px;
+  width: 300px;
+  transition: all ease 0.2s;
+}
+
+.finish:hover {
+  box-shadow: 0 0 5px #ffd700, 0 0 15px #ffd700;
+  text-shadow: 0 0 4px #ffd700, 0 0 8px #ffd700;
+  border: 1px solid;
+}
+
+.board {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+  grid-template-columns: repeat(3, auto);
+}
+
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.x .cell:not(.x):not(.circle):hover::before {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.board.circle .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+  border: 15px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.cell {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid wheat;
+}
+
+.cell:nth-child(1),
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+
+.cell:nth-child(1),
+.cell:nth-child(4),
+.cell:nth-child(7) {
+  border-left: none;
+}
+
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9) {
+  border-right: none;
+}
+
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9) {
+  border-bottom: none;
+}
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.x .cell:not(.x):not(.circle):hover::before {
+  content: "";
+  height: calc(100px * 0.15);
+  width: calc(100px * 0.9);
+  background: wheat;
+  position: absolute;
+}
+
+.cell.x::before,
+.board.x .cell:hover::before {
+  transform: rotate(45deg);
+}
+
+.cell.x::after,
+.cell:hover::after {
+  transform: rotate(-45deg);
+}
+
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+  content: "";
+  height: calc(100px * 0.45);
+  width: calc(100px * 0.45);
+  border: 15px solid wheat;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.cell.x,
+.cell.circle {
+  cursor: not-allowed;
+}
+
+.winning-message {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.winning-message p {
+  font-family: "Carter One", system-ui;
+  font-size: 3.8rem;
+  color: white;
+}
+
+.winning-message .restart {
+  text-decoration: none;
+  font-size: 2.8rem;
+  font-family: "VT323", monospace;
+  color: #fff;
+  background: #833ab4;
+  width: 210px;
+  padding: 4px 8px;
+  border-radius: 15px;
+}
+
+.winning-message .restart:hover {
+  box-shadow: 0 0 5px #b354f2, 0 0 15px #c074f2;
+}
