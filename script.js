@@ -4,6 +4,9 @@ const winningMessage = document.querySelector("[data-winning-message]");
 const winningMessageText = winningMessage.querySelector("p");
 const restartButton = document.querySelector(".restart");
 
+const backgroundMusic = document.getElementById("background-music");
+backgroundMusic.volume = 0.2;
+
 let isCircleTurn;
 
 const winningCombinations = [
@@ -78,6 +81,10 @@ const handleClick = (e) => {
   const cell = e.target;
   const classToAdd = isCircleTurn ? "circle" : "x";
 
+  if (backgroundMusic.paused) {
+    backgroundMusic.play();
+  }
+
   placeMark(cell, classToAdd);
 
   const isWin = checkForWin(classToAdd);
@@ -92,7 +99,7 @@ const handleClick = (e) => {
 };
 
 restartButton.addEventListener("click", (e) => {
-  e.preventDefault(); 
+  e.preventDefault();
   startGame();
 });
 
